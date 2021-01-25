@@ -1,35 +1,25 @@
-import { useState, useRef } from 'react'
 import Head from 'next/head'
+import wretch from 'wretch'
 import { Box, Text } from 'component-library-tsdx-example'
 import { Container } from '../src/components'
 
-// This gets called on every request
 export async function getServerSideProps() {
-  const localApiUrl = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
+  const localApi = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
+  const cryptoPrices = await wretch(`${localApi}/crypto`).get().json()
+  const stockPrice = await wretch(`${localApi}/stock/TSLA`).get().json()
 
-  // Fetch data from external API
-  const res = await fetch(`${localApiUrl}/getCryptoPrices`)
-  const cryptoPrices = await res.json()
-
-  // Pass data to the page via props
-  return { props: { cryptoPrices } }
+  return { props: { cryptoPrices, stockPrice } }
 }
 
-export default function Home({ cryptoPrices }) {
-  const [value, setValue] = useState('Next.js!')
-  const inputRef = useRef()
-
-  const handleChange = (e) => {
-    e.preventDefault()
-    setValue(e.target.value)
-  }
-
+export default function Home({ cryptoPrices, stockPrice }) {
+  // TODO: Call these APIs from within components instead of here
   console.log('🏀 cryptoPrices =>', cryptoPrices)
+  console.log('🏀 stockPrice =>', stockPrice)
 
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Next.js PWA</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -43,23 +33,13 @@ export default function Home({ cryptoPrices }) {
               href='https://nextjs.org'
               display='inline-block'
             >
-              {value}
+              Next.js
             </Text>
           </Text>
 
           <Text mb={5}>
             Get started by editing <code>pages/index.js</code>
           </Text>
-
-          <Box mb={5}>
-            <Box
-              as='input'
-              type='text'
-              ref={inputRef}
-              defaultValue={value}
-              onChange={handleChange}
-            />
-          </Box>
 
           <Box>
             <Text as='a' color='primary' href='https://nextjs.org/docs' mb={5}>
@@ -100,18 +80,6 @@ export default function Home({ cryptoPrices }) {
               </Text>
             </Text>
           </Box>
-        </Box>
-
-        <Box as='footer'>
-          <Text
-            as='a'
-            color='primary'
-            href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Powered by <img src='/vercel.svg' alt='Vercel Logo' />
-          </Text>
         </Box>
       </Container>
     </>
