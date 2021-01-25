@@ -33,5 +33,6 @@ export default async (
     .json()
 
   res.statusCode = 200
+  // @ts-ignore
   res.json({ symbol, price })
 }
