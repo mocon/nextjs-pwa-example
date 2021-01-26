@@ -8,7 +8,7 @@ export const Empty = ({ emoji = '🏖️', message = 'Nothing to see here' }) =>
     alignItems='center'
     p={4}
   >
-    <Text fontSize={60} mb={0}>
+    <Text fontSize={60} m={0}>
       {emoji}
     </Text>
     <Text fontSize={3} color='rgba(0,0,0,0.3)'>
