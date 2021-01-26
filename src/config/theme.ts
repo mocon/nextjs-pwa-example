@@ -27,4 +27,10 @@ export const GlobalStyles = createGlobalStyle<any>`
     font-family: ${({ theme }) => theme.fontFamilies.body};
     color: ${({ theme }) => theme.colors.text};
   }
+
+  #__next {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 `
