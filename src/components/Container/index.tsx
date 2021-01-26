@@ -4,7 +4,8 @@ export const Container = ({ children }) => (
   <Box
     className='Container'
     mx='auto'
-    maxWidth={['100%', 800]}
+    height='100vh'
+    overflowY='auto'
     px={3}
     backgroundColor='background'
   >

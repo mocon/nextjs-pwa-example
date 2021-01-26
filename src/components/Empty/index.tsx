@@ -1,7 +1,16 @@
 import { Box, Text } from 'component-library-tsdx-example'
 
-export const Empty = ({ message }) => (
-  <Box display='flex' justifyContent='center' alignItems='center' p={4}>
+export const Empty = ({ emoji = '🏖️', message = 'Nothing to see here' }) => (
+  <Box
+    display='flex'
+    flexDirection='column'
+    justifyContent='center'
+    alignItems='center'
+    p={4}
+  >
+    <Text fontSize={60} mb={0}>
+      {emoji}
+    </Text>
     <Text fontSize={3} color='rgba(0,0,0,0.3)'>
       {message}
     </Text>

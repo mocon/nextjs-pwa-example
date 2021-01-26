@@ -6,6 +6,7 @@ export const Header = ({ children }) => (
     display='flex'
     justifyContent='space-between'
     alignItems='center'
+    px={3}
     mt={4}
   >
     {children}

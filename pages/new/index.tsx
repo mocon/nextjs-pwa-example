@@ -19,20 +19,18 @@ export default function NewSymbol() {
       <Head>
         <title>New Symbol</title>
       </Head>
+      <Header>
+        <Text as='h1'>New symbol</Text>
+        <Button onClick={() => push('/')}>Back</Button>
+      </Header>
       <Container>
-        <Header>
-          <Text as='h1'>New symbol</Text>
-          <Button onClick={() => push('/')}>Back</Button>
-        </Header>
-
-        <Box>
+        <Box mt={3}>
           <ReactSelect
             placeholder='Select symbol...'
             options={options}
             onChange={(e) => setValue(e.value)}
           />
         </Box>
-
         <Text>Value: {value || 'No value yet'}</Text>
       </Container>
     </>

@@ -7,14 +7,14 @@ export const Button = ({ children, onClick }) => (
     justifyContent='center'
     alignItems='center'
     onClick={onClick}
-    backgroundColor='primary'
+    backgroundColor='text'
     py={2}
     px={3}
     borderRadius={6}
     border='none'
     m={0}
   >
-    <Text fontSize={2} fontWeight='bold' color='white' m={0}>
+    <Text fontSize={2} color='white' m={0}>
       {children}
     </Text>
   </Box>

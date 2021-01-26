@@ -18,14 +18,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Watchlist</title>
+        <title>Symbols</title>
       </Head>
+      <Header>
+        <Text as='h1'>Symbols</Text>
+        <Button onClick={() => push('/new')}>Add</Button>
+      </Header>
       <Container>
-        <Header>
-          <Text as='h1'>Watchlist</Text>
-          <Button onClick={() => push('/new')}>Add</Button>
-        </Header>
-        <Empty message='No symbols yet' />
+        <Empty message='No symbols tracked' />
       </Container>
     </>
   )
