@@ -2,24 +2,19 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Run locally
 
-First, run the development server:
+Run the development server on [http://localhost:3000](http://localhost:3000):
 
 ```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## [API routes](https://nextjs.org/docs/api-routes/introduction)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/getCryptoPrices](http://localhost:3000/api/getCryptoPrices). This endpoint can be edited in `pages/api/getCryptoPrices.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Get all crypto prices: [http://localhost:3000/api/crypto](http://localhost:3000/api/crypto)
+- Get stock price by symbol: [http://localhost:3000/api/stock/TSLA](http://localhost:3000/api/stock/TSLA)
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Deploys to [https://nextjs-pwa-example-zeta.vercel.app/](https://nextjs-pwa-example-zeta.vercel.app/) on push to `main` branch.

@@ -16,6 +16,12 @@ export default function Home({ cryptoPrices, stockPrice }) {
   console.log('🏀 cryptoPrices =>', cryptoPrices)
   console.log('🏀 stockPrice =>', stockPrice)
 
+  const A = ({ children, href }) => (
+    <Text as='a' href={href} color='primary' display='inline-block'>
+      {children}
+    </Text>
+  )
+
   return (
     <>
       <Head>
@@ -25,8 +31,8 @@ export default function Home({ cryptoPrices, stockPrice }) {
 
       <Container>
         <Box as='main'>
-          <Text as='h1'>
-            Welcome to <a href='https://nextjs.org'>Next.js</a>
+          <Text as='h1' mb={3}>
+            Welcome to <A href='https://nextjs.org'>Next.js</A>
           </Text>
 
           <Text>
@@ -34,33 +40,33 @@ export default function Home({ cryptoPrices, stockPrice }) {
           </Text>
 
           <Box>
-            <a href='https://nextjs.org/docs'>
+            <A href='https://nextjs.org/docs'>
               <Text as='h3'>Documentation &rarr;</Text>
               <Text>
                 Find in-depth information about Next.js features and API.
               </Text>
-            </a>
+            </A>
 
-            <a href='https://nextjs.org/learn'>
+            <A href='https://nextjs.org/learn'>
               <Text as='h3'>Learn &rarr;</Text>
               <Text>
                 Learn about Next.js in an interactive course with quizzes!
               </Text>
-            </a>
+            </A>
 
-            <a href='https://github.com/vercel/next.js/tree/master/examples'>
+            <A href='https://github.com/vercel/next.js/tree/master/examples'>
               <Text as='h3'>Examples &rarr;</Text>
               <Text>
                 Discover and deploy boilerplate example Next.js projects.
               </Text>
-            </a>
+            </A>
 
-            <a href='https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'>
+            <A href='https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'>
               <Text as='h3'>Deploy &rarr;</Text>
               <Text>
                 Instantly deploy your Next.js site to a public URL with Vercel.
               </Text>
-            </a>
+            </A>
           </Box>
         </Box>
       </Container>
