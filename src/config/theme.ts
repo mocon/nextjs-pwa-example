@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 export const theme = {
   colors: {
-    primary: '#1f4f46',
+    primary: '#4ca8ea',
     text: '#2d2e2d',
     background: '#fafafa',
   },
@@ -18,7 +18,7 @@ export const theme = {
 
 export const GlobalStyles = createGlobalStyle<any>`
   html {
-    background: ${({ theme }) => theme.colors.background};
+    background: ${({ theme }) => theme.colors.primary};
   }
   
   body {

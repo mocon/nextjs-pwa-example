@@ -11,6 +11,8 @@ export const Button = ({ children, onClick }) => (
     py={2}
     px={3}
     borderRadius={6}
+    border='none'
+    m={0}
   >
     <Text fontSize={2} fontWeight='bold' color='white' m={0}>
       {children}
