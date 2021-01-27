@@ -51,6 +51,7 @@ export default function NewSymbolScreen({ cryptoData, cryptoSymbols }) {
         </Box>
         <Box display='flex' mb={3}>
           <Input
+            type='number'
             placeholder='Quantity'
             onChange={(e) => setQuantity(e.target.value)}
           />

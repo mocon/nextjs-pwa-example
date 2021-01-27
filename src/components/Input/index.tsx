@@ -1,6 +1,6 @@
 import { Box } from 'component-library-tsdx-example'
 
-export const Input = ({ placeholder, onChange }) => (
+export const Input = ({ placeholder, onChange, type = 'text' }) => (
   <Box
     as='input'
     display='flex'
@@ -17,6 +17,7 @@ export const Input = ({ placeholder, onChange }) => (
     placeholder={placeholder}
     onChange={onChange}
     width='100%'
-    style={{ outline: 'none' }}
+    type={type}
+    style={{ outline: 'none', appearance: 'none' }}
   />
 )
