@@ -7,7 +7,7 @@ export const Header = ({ title, children }) => (
     justifyContent='space-between'
     alignItems='center'
     px={3}
-    mt={4}
+    mt={5}
     mb={3}
   >
     <Text as='h1' fontSize={4} fontWeight='normal' color='white'>
