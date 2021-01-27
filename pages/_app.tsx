@@ -6,14 +6,17 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <meta name='application-name' content='Next App' />
+        <meta name='application-name' content='Portfolio View' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta
           name='apple-mobile-web-app-status-bar-style'
           content='black-translucent'
         />
-        <meta name='apple-mobile-web-app-title' content='Next App' />
-        <meta name='description' content='Best PWA App in the world' />
+        <meta name='apple-mobile-web-app-title' content='Portfolio View' />
+        <meta
+          name='description'
+          content='Track your stocks and crypto for free'
+        />
         <meta name='format-detection' content='telephone=no' />
         <meta name='mobile-web-app-capable' content='yes' />
         <meta
@@ -23,6 +26,12 @@ export default function MyApp({ Component, pageProps }) {
         <meta name='msapplication-TileColor' content='#1f4f46' />
         <meta name='msapplication-tap-highlight' content='no' />
         <meta name='theme-color' content='#1f4f46' />
+
+        <link rel='preconnect' href='https://fonts.gstatic.com' />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap'
+          rel='stylesheet'
+        />
 
         <link
           rel='apple-touch-icon'
@@ -54,22 +63,28 @@ export default function MyApp({ Component, pageProps }) {
         />
 
         <meta name='twitter:card' content='summary' />
-        <meta name='twitter:url' content='https://yourdomain.com' />
+        <meta
+          name='twitter:url'
+          content='https://nextjs-pwa-example.mylesoconnor.vercel.app'
+        />
         <meta name='twitter:title' content='PWA App' />
         <meta name='twitter:description' content='Best PWA App in the world' />
         <meta
           name='twitter:image'
-          content='https://yourdomain.com/static/icons/android-chrome-192x192.png'
+          content='https://nextjs-pwa-example.mylesoconnor.vercel.app/static/icons/android-chrome-192x192.png'
         />
         <meta name='twitter:creator' content='@DavidWShadow' />
         <meta property='og:type' content='website' />
         <meta property='og:title' content='PWA App' />
         <meta property='og:description' content='Best PWA App in the world' />
         <meta property='og:site_name' content='PWA App' />
-        <meta property='og:url' content='https://yourdomain.com' />
+        <meta
+          property='og:url'
+          content='https://nextjs-pwa-example.mylesoconnor.vercel.app'
+        />
         <meta
           property='og:image'
-          content='https://yourdomain.com/static/icons/apple-touch-icon.png'
+          content='https://nextjs-pwa-example.mylesoconnor.vercel.app/static/icons/apple-touch-icon.png'
         />
         <meta
           name='viewport'

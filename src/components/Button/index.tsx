@@ -7,7 +7,12 @@ type ButtonProps = {
   disabled?: boolean
 }
 
-export const Button: FC<ButtonProps> = ({ children, onClick, disabled }) => (
+export const Button: FC<ButtonProps> = ({
+  children,
+  onClick,
+  disabled,
+  ...other
+}) => (
   <Box
     as='button'
     display='flex'
@@ -15,13 +20,13 @@ export const Button: FC<ButtonProps> = ({ children, onClick, disabled }) => (
     alignItems='center'
     onClick={onClick}
     backgroundColor='secondary'
-    pt={8}
+    py={10}
     px={20}
-    pb={10}
-    borderRadius={18}
+    borderRadius={4}
     border='none'
-    m={0}
     disabled={disabled}
+    m={0}
+    {...other}
   >
     <Text
       fontSize={1}

@@ -34,11 +34,11 @@ export default function HomeScreen({ cryptoData }) {
   return (
     <>
       <Head>
-        <title>Holdings</title>
+        <title>Portfolio</title>
       </Head>
 
-      <Header title='Holdings'>
-        <Button onClick={() => push('/new')}>Add</Button>
+      <Header title='Portfolio'>
+        <Button onClick={() => push('/symbol-type')}>Add</Button>
       </Header>
 
       <Container>

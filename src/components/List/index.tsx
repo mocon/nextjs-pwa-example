@@ -42,7 +42,7 @@ export const ListItem = ({ cryptoData, symbol, quantity }) => {
           {symbol}
         </Text>
         <Text color='light' mt={2} mb={3}>
-          {quantity} @ {format(currentCrypto.quote.USD.price)}
+          {quantity} * {format(currentCrypto.quote.USD.price)}
         </Text>
       </Box>
     </Box>

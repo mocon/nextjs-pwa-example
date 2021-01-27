@@ -7,16 +7,14 @@ import { Button, Container, Header, Input } from '../../src/components'
 
 export async function getServerSideProps() {
   const localApi = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
-  const { data: cryptoData, reactSelectOptions: cryptoSymbols } = await wretch(
-    `${localApi}/crypto/all-symbols`,
-  )
+  const { reactSelectOptions } = await wretch(`${localApi}/crypto/all-symbols`)
     .get()
     .json()
 
-  return { props: { cryptoData, cryptoSymbols } }
+  return { props: { reactSelectOptions } }
 }
 
-export default function NewSymbolScreen({ cryptoData, cryptoSymbols }) {
+export default function NewStockSymbolScreen({ reactSelectOptions }) {
   const { push } = useRouter()
   const [symbol, setSymbol] = useState()
   const [quantity, setQuantity] = useState()
@@ -26,7 +24,6 @@ export default function NewSymbolScreen({ cryptoData, cryptoSymbols }) {
     const updatedSymbols = !currentSymbols
       ? [{ symbol, quantity }]
       : [...currentSymbols, { symbol, quantity }]
-
     await localStorage.setItem('symbols', JSON.stringify(updatedSymbols))
     push('/')
   }
@@ -34,18 +31,18 @@ export default function NewSymbolScreen({ cryptoData, cryptoSymbols }) {
   return (
     <>
       <Head>
-        <title>Add Holding</title>
+        <title>Add Stock</title>
       </Head>
 
-      <Header title='Add Holding'>
+      <Header title='Add Stock'>
         <Button onClick={() => push('/')}>Back</Button>
       </Header>
 
       <Container>
         <Box my={3}>
           <ReactSelect
-            placeholder='Select crypto...'
-            options={cryptoSymbols}
+            placeholder='Select stock...'
+            options={reactSelectOptions}
             onChange={(e) => setSymbol(e.value)}
           />
         </Box>

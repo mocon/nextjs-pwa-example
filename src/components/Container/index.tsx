@@ -1,6 +1,6 @@
 import { Box } from 'component-library-tsdx-example'
 
-export const Container = ({ children }) => (
+export const Container = ({ children, ...other }) => (
   <Box
     className='Container'
     display='flex'
@@ -9,6 +9,7 @@ export const Container = ({ children }) => (
     overflowY='auto'
     px={3}
     backgroundColor='background'
+    {...other}
   >
     {children}
   </Box>
