@@ -2,45 +2,66 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import wretch from 'wretch'
-import { Box, ReactSelect, Text } from 'component-library-tsdx-example'
-import { Button, Container, Header } from '../../src/components'
+import { Box, ReactSelect } from 'component-library-tsdx-example'
+import { Button, Container, Header, Input } from '../../src/components'
 
 export async function getServerSideProps() {
   const localApi = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
-  const cryptoPrices = await wretch(`${localApi}/crypto`).get().json()
-  const stockPrice = await wretch(`${localApi}/stock/TSLA`).get().json()
+  const { data: cryptoData, reactSelectOptions: cryptoSymbols } = await wretch(
+    `${localApi}/crypto/all-symbols`,
+  )
+    .get()
+    .json()
 
-  return { props: { cryptoPrices, stockPrice } }
+  return { props: { cryptoData, cryptoSymbols } }
 }
 
-export default function NewSymbol({ cryptoPrices, stockPrice }) {
+export default function NewSymbolScreen({ cryptoData, cryptoSymbols }) {
   const { push } = useRouter()
-  const [value, setValue] = useState()
+  const [symbol, setSymbol] = useState()
+  const [quantity, setQuantity] = useState()
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ]
+  async function addSymbolToLocalStorage() {
+    const currentSymbols = await JSON.parse(localStorage.getItem('symbols'))
+    const updatedSymbols = !currentSymbols
+      ? [{ symbol, quantity }]
+      : [...currentSymbols, { symbol, quantity }]
+
+    await localStorage.setItem('symbols', JSON.stringify(updatedSymbols))
+    push('/')
+  }
 
   return (
     <>
       <Head>
-        <title>New Symbol</title>
+        <title>Add Holding</title>
       </Head>
-      <Header>
-        <Text as='h1'>New symbol</Text>
+
+      <Header title='Add Holding'>
         <Button onClick={() => push('/')}>Back</Button>
       </Header>
+
       <Container>
-        <Box mt={3}>
+        <Box my={3}>
           <ReactSelect
-            placeholder='Select symbol...'
-            options={options}
-            onChange={(e) => setValue(e.value)}
+            placeholder='Select crypto...'
+            options={cryptoSymbols}
+            onChange={(e) => setSymbol(e.value)}
           />
         </Box>
-        <Text>Value: {value || 'No value yet'}</Text>
+        <Box display='flex' mb={3}>
+          <Input
+            placeholder='Quantity'
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+        </Box>
+
+        <Button
+          onClick={addSymbolToLocalStorage}
+          disabled={!symbol || !quantity}
+        >
+          Add to List
+        </Button>
       </Container>
     </>
   )

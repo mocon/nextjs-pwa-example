@@ -15,30 +15,36 @@ export const List = ({ children }) => (
   </Box>
 )
 
-export const ListItem = ({ symbol, name, quantity, price }) => (
-  <Box
-    as='li'
-    display='flex'
-    flexDirection='column'
-    width='100%'
-    borderBottom='1px solid'
-    borderColor='rgba(0,0,0,0.05)'
-  >
-    <Box display='flex' justifyContent='space-between' alignItems='center'>
-      <Text fontSize={4} mt={3} mb={0}>
-        {name}
-      </Text>
-      <Text fontSize={4} mt={3} mb={0}>
-        {format(quantity * price)}
-      </Text>
+export const ListItem = ({ cryptoData, symbol, quantity }) => {
+  const currentCrypto = cryptoData.filter(
+    (crypto) => crypto.symbol === symbol,
+  )[0]
+
+  return (
+    <Box
+      as='li'
+      display='flex'
+      flexDirection='column'
+      width='100%'
+      borderBottom='1px solid'
+      borderColor='rgba(0,0,0,0.05)'
+    >
+      <Box display='flex' justifyContent='space-between' alignItems='center'>
+        <Text fontSize={4} mt={3} mb={0}>
+          {currentCrypto.name}
+        </Text>
+        <Text fontSize={4} mt={3} mb={0}>
+          {format(quantity * currentCrypto.quote.USD.price)}
+        </Text>
+      </Box>
+      <Box display='flex' justifyContent='space-between' alignItems='center'>
+        <Text color='light' mt={2} mb={3}>
+          {symbol}
+        </Text>
+        <Text color='light' mt={2} mb={3}>
+          {quantity} @ {format(currentCrypto.quote.USD.price)}
+        </Text>
+      </Box>
     </Box>
-    <Box display='flex' justifyContent='space-between' alignItems='center'>
-      <Text color='light' mt={1}>
-        {symbol}
-      </Text>
-      <Text color='light' mt={1}>
-        {quantity} @ {format(price)}
-      </Text>
-    </Box>
-  </Box>
-)
+  )
+}

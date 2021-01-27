@@ -11,7 +11,7 @@ export const Empty = ({ emoji = '🏖️', message = 'Nothing to see here' }) =>
     <Text fontSize={60} m={0}>
       {emoji}
     </Text>
-    <Text fontSize={3} color='light' mt={1}>
+    <Text fontSize={2} color='light' mt={3}>
       {message}
     </Text>
   </Box>

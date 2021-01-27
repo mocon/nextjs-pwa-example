@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Box, ReactSelect, Text } from 'component-library-tsdx-example'
 import { Button, Container, Header } from '../../src/components'
 
-export default function EditSymbol() {
+export default function EditSymbolScreen() {
   const { push } = useRouter()
   const [value, setValue] = useState()
 
@@ -17,12 +17,13 @@ export default function EditSymbol() {
   return (
     <>
       <Head>
-        <title>Edit Symbol</title>
+        <title>Edit Holding</title>
       </Head>
-      <Header>
-        <Text as='h1'>Edit symbol</Text>
+
+      <Header title='Edit Holding'>
         <Button onClick={() => push('/')}>Back</Button>
       </Header>
+
       <Container>
         <Box mt={3}>
           <ReactSelect
