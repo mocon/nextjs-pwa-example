@@ -8,8 +8,9 @@ export const Button = ({ children, onClick }) => (
     alignItems='center'
     onClick={onClick}
     backgroundColor='text'
-    py={2}
+    pt={8}
     px={3}
+    pb={9}
     borderRadius={6}
     border='none'
     m={0}

@@ -1,16 +1,14 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import wretch from 'wretch'
-import { Box, Text } from 'component-library-tsdx-example'
-import { A, Button, Container, Empty, Header } from '../src/components'
-
-// export async function getServerSideProps() {
-//   const localApi = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
-//   const cryptoPrices = await wretch(`${localApi}/crypto`).get().json()
-//   const stockPrice = await wretch(`${localApi}/stock/TSLA`).get().json()
-
-//   return { props: { cryptoPrices, stockPrice } }
-// }
+import { Text } from 'component-library-tsdx-example'
+import {
+  Button,
+  Container,
+  Empty,
+  Header,
+  List,
+  ListItem,
+} from '../src/components'
 
 export default function Home() {
   const { push } = useRouter()
@@ -18,13 +16,27 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Symbols</title>
+        <title>Holdings</title>
       </Head>
       <Header>
-        <Text as='h1'>Symbols</Text>
+        <Text as='h1'>Holdings</Text>
         <Button onClick={() => push('/new')}>Add</Button>
       </Header>
       <Container>
+        <List>
+          <ListItem
+            symbol='TSLA'
+            name='Tesla, Inc'
+            quantity={1.765}
+            price={860.125}
+          />
+          <ListItem
+            symbol='AAPL'
+            name='Tesla, Inc'
+            quantity={25}
+            price={143.786}
+          />
+        </List>
         <Empty message='No symbols tracked' />
       </Container>
     </>

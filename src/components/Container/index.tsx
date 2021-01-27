@@ -8,7 +8,7 @@ export const Container = ({ children }) => {
         url: window.location.href,
       })
     } catch (err) {
-      alert(err)
+      console.log(err)
     }
   }
 
