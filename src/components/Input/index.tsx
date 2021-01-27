@@ -18,6 +18,6 @@ export const Input = ({ placeholder, onChange, type = 'text' }) => (
     onChange={onChange}
     width='100%'
     type={type}
-    style={{ outline: 'none', appearance: 'none' }}
+    style={{ outline: 'none', '-webkit-appearance': 'none' }}
   />
 )
