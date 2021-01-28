@@ -26,14 +26,14 @@ export default async (
     .get()
     .json()
 
-  let cryptoOptions = []
+  let reactSelectOptions = []
   data.forEach((crypto) =>
-    cryptoOptions.push({
+    reactSelectOptions.push({
       value: crypto.symbol,
       label: `${crypto.symbol} - ${crypto.name}`,
     }),
   )
 
   res.statusCode = 200
-  res.json({ data, reactSelectOptions: cryptoOptions })
+  res.json({ data, reactSelectOptions })
 }

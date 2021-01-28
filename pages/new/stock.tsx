@@ -7,7 +7,7 @@ import { Button, Container, Header, Input } from '../../src/components'
 
 export async function getServerSideProps() {
   const localApi = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
-  const { reactSelectOptions } = await wretch(`${localApi}/crypto/all-symbols`)
+  const { reactSelectOptions } = await wretch(`${localApi}/stock/all-symbols`)
     .get()
     .json()
 
@@ -19,14 +19,14 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
   const [symbol, setSymbol] = useState()
   const [quantity, setQuantity] = useState()
 
-  async function addSymbolToLocalStorage() {
-    const currentSymbols = await JSON.parse(localStorage.getItem('symbols'))
-    const updatedSymbols = !currentSymbols
-      ? [{ symbol, quantity }]
-      : [...currentSymbols, { symbol, quantity }]
-    await localStorage.setItem('symbols', JSON.stringify(updatedSymbols))
-    push('/')
-  }
+  // async function addSymbolToLocalStorage() {
+  //   const currentSymbols = await JSON.parse(localStorage.getItem('symbols'))
+  //   const updatedSymbols = !currentSymbols
+  //     ? [{ symbol, quantity }]
+  //     : [...currentSymbols, { symbol, quantity }]
+  //   await localStorage.setItem('symbols', JSON.stringify(updatedSymbols))
+  //   push('/')
+  // }
 
   return (
     <>
@@ -55,7 +55,7 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
         </Box>
 
         <Button
-          onClick={addSymbolToLocalStorage}
+          // onClick={addSymbolToLocalStorage}
           disabled={!symbol || !quantity}
         >
           Add to List

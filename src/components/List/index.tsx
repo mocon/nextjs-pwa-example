@@ -16,9 +16,7 @@ export const List = ({ children }) => (
 )
 
 export const ListItem = ({ cryptoData, symbol, quantity }) => {
-  const currentCrypto = cryptoData.filter(
-    (crypto) => crypto.symbol === symbol,
-  )[0]
+  const currentCrypto = cryptoData.filter((c) => c.symbol === symbol)[0]
 
   return (
     <Box
