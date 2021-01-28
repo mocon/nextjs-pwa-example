@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { Box } from 'component-library-tsdx-example'
+import * as R from 'ramda'
 import { Button } from '../../components'
 
 export const ShareButton = () => {
@@ -12,7 +14,9 @@ export const ShareButton = () => {
     }
   }
 
-  if (!navigator.share) return null
+  useEffect(() => {
+    if (!R.path(['navigator', 'share'], window)) return null
+  }, [])
 
   return (
     <Box className='Share' position='fixed' left={0} bottom={0} right={0} p={3}>
