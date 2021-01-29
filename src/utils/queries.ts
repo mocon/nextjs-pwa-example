@@ -26,6 +26,9 @@ export const fetchAllCryptoSymbols = () =>
 export const fetchAllStockSymbols = () =>
   wretch(`${LOCAL_API}/stock/all-symbols`).get().json()
 
+export const fetchStockPriceBySymbol = (symbol) =>
+  wretch(`${LOCAL_API}/stock/${symbol}`).get().json()
+
 export const fetchPortfolioPrices = (cryptos, stocks) =>
   wretch(`${LOCAL_API}/portfolio`)
     .post(JSON.stringify({ cryptos, stocks }))
