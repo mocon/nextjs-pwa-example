@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useQueryClient } from 'react-query'
 import { Box, ReactSelect } from 'component-library-tsdx-example'
 import { Button, Container, Header, Input } from '../../src/components'
 import { fetchAllStockSymbols } from '../../src/utils/queries'
@@ -15,12 +16,14 @@ export async function getServerSideProps() {
 export default function NewStockSymbolScreen({ reactSelectOptions }) {
   const { push } = useRouter()
   const dispatch = useDispatch()
+  const queryClient = useQueryClient()
   const [symbol, setSymbol] = useState('')
   const [name, setName] = useState('')
   const [quantity, setQuantity] = useState(0)
 
   async function trackSymbol() {
     dispatch(addStockSymbol({ symbol, name, quantity }))
+    queryClient.invalidateQueries('portfolioPrices')
     push('/')
   }
 

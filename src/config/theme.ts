@@ -6,7 +6,7 @@ export const theme = {
     secondary: '#052959',
     light: '#cacaca',
     text: '#2d2e2d',
-    background: '#fafafa',
+    background: '#fff',
   },
   fontFamilies: {
     heading:

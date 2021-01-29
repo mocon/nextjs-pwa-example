@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 import { useSelector } from 'react-redux'
+import * as R from 'ramda'
 import {
   Button,
   Container,
@@ -10,32 +11,15 @@ import {
   List,
   ShareButton,
 } from '../src/components'
-import { fetchAllCryptoData, fetchAllStockSymbols } from '../src/utils/queries'
+import { fetchPortfolioPrices } from '../src/utils/queries'
 
-export async function getServerSideProps() {
-  const { data: cryptoData } = await fetchAllCryptoData()
-  const { data: stockData } = await fetchAllStockSymbols()
-  return { props: { cryptoData, stockData } }
-}
-
-export default function HomeScreen({ cryptoData, stockData }) {
+export default function HomeScreen() {
   const { push } = useRouter()
-  const trackedCryptos = useSelector((state) => state.symbols.cryptos)
-  const trackedStocks = useSelector((state) => state.symbols.stocks)
-  const symbols = [...trackedCryptos, ...trackedStocks]
-
-  const { data: allCryptoData } = useQuery(
-    'allCryptoData',
-    fetchAllCryptoData,
-    { initialData: cryptoData },
-  )
-
-  const { data: allStockData } = useQuery(
-    'allStockData',
-    fetchAllStockSymbols,
-    {
-      initialData: stockData,
-    },
+  const cryptos = useSelector((state) => state.symbols.cryptos)
+  const stocks = useSelector((state) => state.symbols.stocks)
+  const { data: portfolio, isLoading, error } = useQuery(
+    'portfolioPrices',
+    () => fetchPortfolioPrices(cryptos, stocks),
   )
 
   return (
@@ -49,10 +33,14 @@ export default function HomeScreen({ cryptoData, stockData }) {
       </Header>
 
       <Container>
-        {/* {symbols.length > 0 && <List portfolio={null} />} */}
+        {R.path(['length'], portfolio) > 0 && (
+          // @ts-ignore
+          <List portfolio={portfolio} />
+        )}
 
-        {symbols.length === 0 && <Empty message='No symbols tracked' />}
-
+        {R.path(['length'], portfolio) === 0 && (
+          <Empty message='Wow such empty' />
+        )}
         <ShareButton />
       </Container>
     </>

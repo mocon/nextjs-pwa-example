@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Box, Text } from 'component-library-tsdx-example'
 import { format } from 'src/utils/format'
 
-type Asset = {
+export type Asset = {
   name: string
   symbol: string
   quantity: number
@@ -10,24 +10,34 @@ type Asset = {
 }
 
 type ListProps = {
-  portfolio: Asset[]
+  portfolio?: [Asset]
 }
 
-export const List: FC<ListProps> = ({ portfolio }) => (
-  <Box
-    as='ul'
-    display='flex'
-    flexDirection='column'
-    justifyContent='space-between'
-    alignItems='center'
-    m={0}
-    p={0}
-  >
-    {portfolio.map(({ name, symbol, quantity, price }) => (
-      <ListItem name={name} symbol={symbol} quantity={quantity} price={price} />
-    ))}
-  </Box>
-)
+export const List: FC<ListProps> = ({ portfolio }) => {
+  if (!portfolio) return null
+
+  return (
+    <Box
+      as='ul'
+      display='flex'
+      flexDirection='column'
+      justifyContent='space-between'
+      alignItems='center'
+      m={0}
+      p={0}
+    >
+      {portfolio.map(({ name, symbol, quantity, price }) => (
+        <ListItem
+          key={symbol}
+          name={name}
+          symbol={symbol}
+          quantity={quantity}
+          price={price}
+        />
+      ))}
+    </Box>
+  )
+}
 
 export const ListItem = ({ name, symbol, quantity, price }) => (
   <Box
