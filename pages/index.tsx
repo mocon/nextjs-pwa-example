@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import * as R from 'ramda'
 import {
   Button,
+  ClearButton,
   Container,
   Empty,
   Header,
@@ -18,9 +19,8 @@ export default function HomeScreen() {
   const { push } = useRouter()
   const cryptos = useSelector((state) => state.symbols.cryptos)
   const stocks = useSelector((state) => state.symbols.stocks)
-  const { data: portfolio, isLoading, error } = useQuery(
-    'portfolioPrices',
-    () => fetchPortfolioPrices(cryptos, stocks),
+  const { data: portfolio, isLoading } = useQuery('portfolioPrices', () =>
+    fetchPortfolioPrices(cryptos, stocks),
   )
 
   return (
@@ -44,7 +44,10 @@ export default function HomeScreen() {
         {R.path(['length'], portfolio) === 0 && (
           <Empty message='Wow such empty' />
         )}
+
         <ShareButton />
+
+        <ClearButton />
       </Container>
     </>
   )

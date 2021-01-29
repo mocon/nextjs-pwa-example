@@ -24,6 +24,11 @@ const symbolsSlice = createSlice({
         (s) => s.symbol !== action.payload.symbol,
       )
     },
+    // Usage: dispatch(resetAllSymbols())
+    resetAllSymbols: (state) => {
+      state.cryptos = []
+      state.stocks = []
+    },
   },
 })
 
@@ -34,6 +39,7 @@ export const {
   removeCryptoSymbol,
   addStockSymbol,
   removeStockSymbol,
+  resetAllSymbols,
 } = actions
 
 export default reducer

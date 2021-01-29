@@ -1,5 +1,6 @@
 import { A } from './A'
 import { Button } from './Button'
+import { ClearButton } from './ClearButton'
 import { Container } from './Container'
 import { Empty } from './Empty'
 import { Header } from './Header'
@@ -11,6 +12,7 @@ import { ShareButton } from './ShareButton'
 export {
   A,
   Button,
+  ClearButton,
   Container,
   Empty,
   Header,

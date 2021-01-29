@@ -32,8 +32,12 @@ export const List: FC<ListProps> = ({ portfolio }) => {
         alignItems='center'
         mt={3}
       >
-        <Button onClick={() => setSortBy('name')}>Name</Button>
-        <Button onClick={() => setSortBy('total')}>Total</Button>
+        <Button appearance='outline' onClick={() => setSortBy('name')}>
+          Sort by Name
+        </Button>
+        <Button appearance='outline' onClick={() => setSortBy('total')}>
+          Sort by Total
+        </Button>
       </Box>
 
       <Box
