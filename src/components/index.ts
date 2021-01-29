@@ -5,6 +5,7 @@ import { Empty } from './Empty'
 import { Header } from './Header'
 import { Input } from './Input'
 import { List, ListItem } from './List'
+import { Loading } from './Loading'
 import { ShareButton } from './ShareButton'
 
 export {
@@ -16,5 +17,6 @@ export {
   Input,
   List,
   ListItem,
+  Loading,
   ShareButton,
 }

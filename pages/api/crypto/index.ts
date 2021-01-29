@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import wretch from 'wretch'
 
-// See https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsLatest for details
 const cryptoApiKey = process.env.COINMARKETCAP_API_KEY
 const cryptoApiUrl = process.env.COINMARKETCAP_API_URL
 

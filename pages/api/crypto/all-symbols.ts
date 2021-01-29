@@ -18,7 +18,7 @@ export default async (
   req: NextApiRequest,
   res: NextApiResponse<CryptoResponseData>,
 ) => {
-  const { data, status } = await wretch()
+  const { data } = await wretch()
     .url(`${cryptoApiUrl}/cryptocurrency/listings/latest`)
     .headers({
       'X-CMC_PRO_API_KEY': cryptoApiKey,
@@ -26,14 +26,13 @@ export default async (
     .get()
     .json()
 
-  let reactSelectOptions = []
-  data.forEach((crypto) =>
-    reactSelectOptions.push({
+  const reactSelectOptions = data.map((crypto) => {
+    return {
       value: crypto.symbol,
       label: `${crypto.symbol} - ${crypto.name}`,
       name: crypto.name,
-    }),
-  )
+    }
+  })
 
   res.statusCode = 200
   res.json({ data, reactSelectOptions })

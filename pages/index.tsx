@@ -9,6 +9,7 @@ import {
   Empty,
   Header,
   List,
+  Loading,
   ShareButton,
 } from '../src/components'
 import { fetchPortfolioPrices } from '../src/utils/queries'
@@ -33,6 +34,8 @@ export default function HomeScreen() {
       </Header>
 
       <Container>
+        {isLoading && <Loading />}
+
         {R.path(['length'], portfolio) > 0 && (
           // @ts-ignore
           <List portfolio={portfolio} />

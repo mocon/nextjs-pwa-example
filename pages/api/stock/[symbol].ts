@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import wretch from 'wretch'
 
-// See https://rapidapi.com/twelvedata/api/twelve-data1?endpoint=apiendpoint_2d125704-6e3e-4be1-a561-70705e199ef7 for details
 const stockApiKey = process.env.TWELVEDATA_API_KEY
 const stockApiUrl = process.env.TWELVEDATA_API_URL
 

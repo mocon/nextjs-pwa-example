@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import wretch from 'wretch'
 
-import {
-  fetchAllCryptoData,
-  fetchStockPriceBySymbol,
-} from '../../../src/utils/queries'
+const cryptoApiKey = process.env.COINMARKETCAP_API_KEY
+const cryptoApiUrl = process.env.COINMARKETCAP_API_URL
+const stockApiKey = process.env.TWELVEDATA_API_KEY
+const stockApiUrl = process.env.TWELVEDATA_API_URL
 
 import type { Asset } from '../../../src/components/List'
 
@@ -16,22 +17,44 @@ export default async (
   res: NextApiResponse<PortfolioResponseData>,
 ) => {
   const { cryptos, stocks } = JSON.parse(req.body)
-  const { data: cryptoPrices } = await fetchAllCryptoData()
+
+  const { data: cryptoPrices } = await wretch()
+    .url(`${cryptoApiUrl}/cryptocurrency/listings/latest`)
+    .headers({
+      'X-CMC_PRO_API_KEY': cryptoApiKey,
+    })
+    .get()
+    .json()
 
   const cryptoPortfolio = cryptos.map(({ name, symbol, quantity }) => {
-    const cryptoPrice = cryptoPrices.filter((c) => c.symbol === symbol)[0]
+    const cryptoPrice = cryptoPrices.find((c) => c.symbol === symbol)
+
     return {
       name,
       symbol,
       quantity,
       price: cryptoPrice.quote.USD.price,
+      total: quantity * cryptoPrice.quote.USD.price,
     }
   })
 
   const stockPortfolio = await Promise.all(
     stocks.map(async ({ name, symbol, quantity }) => {
-      const { price } = await fetchStockPriceBySymbol(symbol)
-      return { name, symbol, quantity, price }
+      const { price } = await wretch()
+        .url(`${stockApiUrl}/price`)
+        .headers({
+          'x-rapidapi-key': stockApiKey,
+          'x-rapidapi-host': 'twelve-data1.p.rapidapi.com',
+        })
+        .query({
+          symbol,
+          outputsize: '30',
+          format: 'json',
+        })
+        .get()
+        .json()
+
+      return { name, symbol, quantity, price, total: quantity * price }
     }),
   )
 

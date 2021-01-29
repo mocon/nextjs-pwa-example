@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 export const theme = {
   colors: {
     primary: '#4ca8ea',
-    secondary: '#052959',
+    secondary: '#0070f3',
     light: '#cacaca',
     text: '#2d2e2d',
     background: '#fff',

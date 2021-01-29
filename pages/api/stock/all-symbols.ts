@@ -31,14 +31,13 @@ export default async (
     .get()
     .json()
 
-  let reactSelectOptions = []
-  data.forEach((stock) =>
-    reactSelectOptions.push({
+  const reactSelectOptions = data.map((stock) => {
+    return {
       value: stock.symbol,
       label: `${stock.symbol} - ${stock.name}`,
       name: stock.name,
-    }),
-  )
+    }
+  })
 
   res.statusCode = 200
   res.json({ data, reactSelectOptions })

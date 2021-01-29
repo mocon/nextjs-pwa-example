@@ -1,5 +1,7 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Box, Text } from 'component-library-tsdx-example'
+import * as R from 'ramda'
+import { Button } from '../Button'
 import { format } from 'src/utils/format'
 
 export type Asset = {
@@ -7,6 +9,7 @@ export type Asset = {
   symbol: string
   quantity: number
   price: number
+  total: number
 }
 
 type ListProps = {
@@ -14,28 +17,45 @@ type ListProps = {
 }
 
 export const List: FC<ListProps> = ({ portfolio }) => {
+  const [sortBy, setSortBy] = useState('total')
+
   if (!portfolio) return null
 
+  const sorter = (d) => (d === 'desc' ? R.descend : R.ascend)(R.prop(sortBy))
+  const sorted = R.sort(sorter(sortBy === 'total' ? 'desc' : 'asc'), portfolio)
+
   return (
-    <Box
-      as='ul'
-      display='flex'
-      flexDirection='column'
-      justifyContent='space-between'
-      alignItems='center'
-      m={0}
-      p={0}
-    >
-      {portfolio.map(({ name, symbol, quantity, price }) => (
-        <ListItem
-          key={symbol}
-          name={name}
-          symbol={symbol}
-          quantity={quantity}
-          price={price}
-        />
-      ))}
-    </Box>
+    <>
+      <Box
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+        mt={3}
+      >
+        <Button onClick={() => setSortBy('name')}>Name</Button>
+        <Button onClick={() => setSortBy('total')}>Total</Button>
+      </Box>
+
+      <Box
+        as='ul'
+        display='flex'
+        flexDirection='column'
+        justifyContent='space-between'
+        alignItems='center'
+        m={0}
+        p={0}
+      >
+        {sorted.map(({ name, symbol, quantity, price }) => (
+          <ListItem
+            key={symbol}
+            name={name}
+            symbol={symbol}
+            quantity={quantity}
+            price={price}
+          />
+        ))}
+      </Box>
+    </>
   )
 }
 
