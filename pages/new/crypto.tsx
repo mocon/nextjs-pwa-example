@@ -15,11 +15,12 @@ export async function getServerSideProps() {
 export default function NewCryptoSymbolScreen({ reactSelectOptions }) {
   const { push } = useRouter()
   const dispatch = useDispatch()
-  const [symbol, setSymbol] = useState()
-  const [quantity, setQuantity] = useState()
+  const [symbol, setSymbol] = useState('')
+  const [name, setName] = useState('')
+  const [quantity, setQuantity] = useState(0)
 
   async function trackSymbol() {
-    dispatch(addCryptoSymbol({ symbol, quantity }))
+    dispatch(addCryptoSymbol({ symbol, name, quantity }))
     push('/')
   }
 
@@ -38,7 +39,10 @@ export default function NewCryptoSymbolScreen({ reactSelectOptions }) {
           <ReactSelect
             placeholder='Select crypto...'
             options={reactSelectOptions}
-            onChange={(e) => setSymbol(e.value)}
+            onChange={(e) => {
+              setSymbol(e.value)
+              setName(e.name)
+            }}
           />
         </Box>
         <Box display='flex' mb={3}>

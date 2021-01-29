@@ -36,10 +36,10 @@ export default async (
     reactSelectOptions.push({
       value: stock.symbol,
       label: `${stock.symbol} - ${stock.name}`,
+      name: stock.name,
     }),
   )
 
   res.statusCode = 200
-  // @ts-ignore
   res.json({ data, reactSelectOptions })
 }

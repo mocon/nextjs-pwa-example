@@ -20,21 +20,16 @@ export const Button: FC<ButtonProps> = ({
     alignItems='center'
     onClick={onClick}
     backgroundColor='secondary'
-    py={10}
-    px={20}
-    borderRadius={4}
+    py='0.25rem'
+    px='1rem'
+    borderRadius={7}
     border='none'
     disabled={disabled}
     m={0}
+    style={{ cursor: 'pointer' }}
     {...other}
   >
-    <Text
-      fontSize={1}
-      fontWeight='bold'
-      color='white'
-      m={0}
-      style={{ textTransform: 'uppercase' }}
-    >
+    <Text fontSize={2} fontWeight='bold' color='white' m={0}>
       {children}
     </Text>
   </Box>

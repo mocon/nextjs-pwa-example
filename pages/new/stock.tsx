@@ -15,11 +15,12 @@ export async function getServerSideProps() {
 export default function NewStockSymbolScreen({ reactSelectOptions }) {
   const { push } = useRouter()
   const dispatch = useDispatch()
-  const [symbol, setSymbol] = useState()
-  const [quantity, setQuantity] = useState()
+  const [symbol, setSymbol] = useState('')
+  const [name, setName] = useState('')
+  const [quantity, setQuantity] = useState(0)
 
   async function trackSymbol() {
-    dispatch(addStockSymbol({ symbol, quantity }))
+    dispatch(addStockSymbol({ symbol, name, quantity }))
     push('/')
   }
 
@@ -38,7 +39,10 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
           <ReactSelect
             placeholder='Select stock...'
             options={reactSelectOptions}
-            onChange={(e) => setSymbol(e.value)}
+            onChange={(e) => {
+              setSymbol(e.value)
+              setName(e.name)
+            }}
           />
         </Box>
         <Box display='flex' mb={3}>

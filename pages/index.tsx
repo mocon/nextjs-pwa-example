@@ -8,7 +8,6 @@ import {
   Empty,
   Header,
   List,
-  ListItem,
   ShareButton,
 } from '../src/components'
 import { fetchAllCryptoData, fetchAllStockSymbols } from '../src/utils/queries'
@@ -23,9 +22,7 @@ export default function HomeScreen({ cryptoData, stockData }) {
   const { push } = useRouter()
   const trackedCryptos = useSelector((state) => state.symbols.cryptos)
   const trackedStocks = useSelector((state) => state.symbols.stocks)
-
-  // TODO: Delete this
-  const symbols = [...trackedCryptos]
+  const symbols = [...trackedCryptos, ...trackedStocks]
 
   const { data: allCryptoData } = useQuery(
     'allCryptoData',
@@ -52,17 +49,7 @@ export default function HomeScreen({ cryptoData, stockData }) {
       </Header>
 
       <Container>
-        <List>
-          {symbols.length > 0 &&
-            symbols.map(({ symbol, quantity }) => (
-              <ListItem
-                key={symbol}
-                symbol={symbol}
-                quantity={quantity}
-                cryptoData={cryptoData}
-              />
-            ))}
-        </List>
+        {/* {symbols.length > 0 && <List portfolio={null} />} */}
 
         {symbols.length === 0 && <Empty message='No symbols tracked' />}
 

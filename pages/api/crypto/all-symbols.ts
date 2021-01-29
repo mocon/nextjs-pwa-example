@@ -31,6 +31,7 @@ export default async (
     reactSelectOptions.push({
       value: crypto.symbol,
       label: `${crypto.symbol} - ${crypto.name}`,
+      name: crypto.name,
     }),
   )
 
