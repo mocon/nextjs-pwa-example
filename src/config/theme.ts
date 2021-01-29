@@ -18,10 +18,6 @@ export const theme = {
 }
 
 export const GlobalStyles = createGlobalStyle<any>`
-  html {
-    background: ${({ theme }) => theme.colors.primary};
-  }
-
   /* CSS reset */
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -76,6 +72,9 @@ export const GlobalStyles = createGlobalStyle<any>`
   body {
     font-family: ${({ theme }) => theme.fontFamilies.body};
     color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.primary};
+    background: linear-gradient(0deg, ${({ theme }) =>
+      theme.colors.background} 0%, ${({ theme }) => theme.colors.primary} 100%);
   }
 
   #__next {

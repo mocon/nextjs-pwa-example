@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import wretch from 'wretch'
+import { useQuery } from 'react-query'
+import { useSelector } from 'react-redux'
 import {
   Button,
   Container,
@@ -11,25 +11,35 @@ import {
   ListItem,
   ShareButton,
 } from '../src/components'
+import { fetchAllCryptoData, fetchAllStockSymbols } from '../src/utils/queries'
 
 export async function getServerSideProps() {
-  const localApi = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
-  const { data: cryptoData } = await wretch(`${localApi}/crypto`).get().json()
-  return { props: { cryptoData } }
+  const { data: cryptoData } = await fetchAllCryptoData()
+  const { data: stockData } = await fetchAllStockSymbols()
+  return { props: { cryptoData, stockData } }
 }
 
-export default function HomeScreen({ cryptoData }) {
+export default function HomeScreen({ cryptoData, stockData }) {
   const { push } = useRouter()
-  const [symbols, setSymbols] = useState([])
+  const trackedCryptos = useSelector((state) => state.symbols.cryptos)
+  const trackedStocks = useSelector((state) => state.symbols.stocks)
 
-  async function getSymbolsFromLocalStorage() {
-    const localSymbols = await JSON.parse(localStorage.getItem('symbols'))
-    if (localSymbols) setSymbols(localSymbols)
-  }
+  // TODO: Delete this
+  const symbols = [...trackedCryptos]
 
-  useEffect(() => {
-    getSymbolsFromLocalStorage()
-  }, [])
+  const { data: allCryptoData } = useQuery(
+    'allCryptoData',
+    fetchAllCryptoData,
+    { initialData: cryptoData },
+  )
+
+  const { data: allStockData } = useQuery(
+    'allStockData',
+    fetchAllStockSymbols,
+    {
+      initialData: stockData,
+    },
+  )
 
   return (
     <>

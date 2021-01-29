@@ -1,32 +1,27 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import wretch from 'wretch'
+import { useDispatch } from 'react-redux'
 import { Box, ReactSelect } from 'component-library-tsdx-example'
 import { Button, Container, Header, Input } from '../../src/components'
+import { fetchAllStockSymbols } from '../../src/utils/queries'
+import { addStockSymbol } from '../../src/store/symbols'
 
 export async function getServerSideProps() {
-  const localApi = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
-  const { reactSelectOptions } = await wretch(`${localApi}/stock/all-symbols`)
-    .get()
-    .json()
-
+  const { reactSelectOptions } = await fetchAllStockSymbols()
   return { props: { reactSelectOptions } }
 }
 
 export default function NewStockSymbolScreen({ reactSelectOptions }) {
   const { push } = useRouter()
+  const dispatch = useDispatch()
   const [symbol, setSymbol] = useState()
   const [quantity, setQuantity] = useState()
 
-  // async function addSymbolToLocalStorage() {
-  //   const currentSymbols = await JSON.parse(localStorage.getItem('symbols'))
-  //   const updatedSymbols = !currentSymbols
-  //     ? [{ symbol, quantity }]
-  //     : [...currentSymbols, { symbol, quantity }]
-  //   await localStorage.setItem('symbols', JSON.stringify(updatedSymbols))
-  //   push('/')
-  // }
+  async function trackSymbol() {
+    dispatch(addStockSymbol({ symbol, quantity }))
+    push('/')
+  }
 
   return (
     <>
@@ -54,10 +49,7 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
           />
         </Box>
 
-        <Button
-          // onClick={addSymbolToLocalStorage}
-          disabled={!symbol || !quantity}
-        >
+        <Button onClick={trackSymbol} disabled={!symbol || !quantity}>
           Add to List
         </Button>
       </Container>
