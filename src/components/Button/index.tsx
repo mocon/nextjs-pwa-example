@@ -44,8 +44,9 @@ export const Button: FC<ButtonProps> = ({
       borderColor='secondary'
       borderRadius={7}
       m={0}
-      py='0.25rem'
+      pt='0.5rem'
       px='1rem'
+      pb='0.6rem'
       disabled={disabled}
       style={{ cursor: 'pointer' }}
       {...other}

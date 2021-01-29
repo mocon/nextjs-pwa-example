@@ -43,12 +43,6 @@ export default function MyApp({ Component, pageProps }) {
             <meta name='msapplication-tap-highlight' content='no' />
             <meta name='theme-color' content='#1f4f46' />
 
-            <link rel='preconnect' href='https://fonts.gstatic.com' />
-            <link
-              href='https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap'
-              rel='stylesheet'
-            />
-
             <link
               rel='apple-touch-icon'
               sizes='180x180'

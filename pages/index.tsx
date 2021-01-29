@@ -42,7 +42,7 @@ export default function HomeScreen() {
         )}
 
         {R.path(['length'], portfolio) === 0 && (
-          <Empty message='Wow such empty' />
+          <Empty message='Portfolio is empty' />
         )}
 
         <ShareButton />
