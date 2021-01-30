@@ -34,14 +34,16 @@ export default function HomeScreen() {
       <Container>
         {isLoading && <Loading />}
         {R.path(['length'], portfolio) > 0 && (
-          // @ts-ignore
-          <List portfolio={portfolio} />
+          <>
+            {/* @ts-ignore */}
+            <List portfolio={portfolio} />
+            <ClearButton />
+          </>
         )}
         {R.path(['length'], portfolio) === 0 && (
           <Empty message='Portfolio is empty' />
         )}
         <ShareButton />
-        <ClearButton />
       </Container>
     </>
   )
