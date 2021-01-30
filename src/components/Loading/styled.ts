@@ -2,6 +2,12 @@ import styled from 'styled-components'
 import { Box } from 'component-library-tsdx-example'
 
 export const LoadingStyled = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
   .GridLoader {
     display: inline-block;
     position: relative;
