@@ -12,8 +12,8 @@ import {
   List,
   Loading,
   ShareButton,
-} from '../src/components'
-import { fetchPortfolioPrices } from '../src/utils/queries'
+} from 'src/components'
+import { fetchPortfolioPrices } from 'src/utils/queries'
 
 export default function HomeScreen() {
   const { push } = useRouter()
@@ -28,25 +28,19 @@ export default function HomeScreen() {
       <Head>
         <title>Portfolio</title>
       </Head>
-
       <Header title='Portfolio'>
         <Button onClick={() => push('/symbol-type')}>Add</Button>
       </Header>
-
       <Container>
         {isLoading && <Loading />}
-
         {R.path(['length'], portfolio) > 0 && (
           // @ts-ignore
           <List portfolio={portfolio} />
         )}
-
         {R.path(['length'], portfolio) === 0 && (
           <Empty message='Portfolio is empty' />
         )}
-
         <ShareButton />
-
         <ClearButton />
       </Container>
     </>

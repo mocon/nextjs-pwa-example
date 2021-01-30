@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useQueryClient } from 'react-query'
 import { Box, ReactSelect } from 'component-library-tsdx-example'
-import { Button, Container, Header, Input } from '../../src/components'
-import { fetchAllCryptoSymbols } from '../../src/utils/queries'
-import { addCryptoSymbol } from '../../src/store/symbols'
+import { Button, Container, Header, Input } from 'src/components'
+import { fetchAllCryptoSymbols } from 'src/utils/queries'
+import { addCryptoSymbol } from 'src/store/symbols'
 
 export async function getServerSideProps() {
   const { reactSelectOptions } = await fetchAllCryptoSymbols()
@@ -32,11 +32,9 @@ export default function NewCryptoSymbolScreen({ reactSelectOptions }) {
       <Head>
         <title>Add Crypto</title>
       </Head>
-
       <Header title='Add Crypto'>
         <Button onClick={() => push('/')}>Back</Button>
       </Header>
-
       <Container>
         <Box my={3}>
           <ReactSelect
@@ -55,7 +53,6 @@ export default function NewCryptoSymbolScreen({ reactSelectOptions }) {
             onChange={(e) => setQuantity(e.target.value)}
           />
         </Box>
-
         <Button onClick={trackSymbol} disabled={!symbol || !quantity}>
           Add to List
         </Button>

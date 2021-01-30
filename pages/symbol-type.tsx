@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Box, Text } from 'component-library-tsdx-example'
-import { Button, Container, Header } from '../src/components'
+import { Button, Container, Header } from 'src/components'
 
 export default function SymbolTypeScreen() {
   const { push } = useRouter()
@@ -11,11 +11,9 @@ export default function SymbolTypeScreen() {
       <Head>
         <title>Symbol Type</title>
       </Head>
-
       <Header title='Symbol Type'>
         <Button onClick={() => push('/')}>Back</Button>
       </Header>
-
       <Container justifyContent='center' alignItems='center'>
         <Text fontSize={4} mb={4}>
           What type of symbol?

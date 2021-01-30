@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useQueryClient } from 'react-query'
 import { Box, ReactSelect } from 'component-library-tsdx-example'
-import { Button, Container, Header, Input } from '../../src/components'
-import { fetchAllStockSymbols } from '../../src/utils/queries'
-import { addStockSymbol } from '../../src/store/symbols'
+import { Button, Container, Header, Input } from 'src/components'
+import { fetchAllStockSymbols } from 'src/utils/queries'
+import { addStockSymbol } from 'src/store/symbols'
 
 export async function getServerSideProps() {
   const { reactSelectOptions } = await fetchAllStockSymbols()
@@ -32,11 +32,9 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
       <Head>
         <title>Add Stock</title>
       </Head>
-
       <Header title='Add Stock'>
         <Button onClick={() => push('/')}>Back</Button>
       </Header>
-
       <Container>
         <Box my={3}>
           <ReactSelect
@@ -55,7 +53,6 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
             onChange={(e) => setQuantity(e.target.value)}
           />
         </Box>
-
         <Button onClick={trackSymbol} disabled={!symbol || !quantity}>
           Add to List
         </Button>

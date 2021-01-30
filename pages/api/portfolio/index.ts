@@ -6,7 +6,7 @@ const cryptoApiUrl = process.env.COINMARKETCAP_API_URL
 const stockApiKey = process.env.TWELVEDATA_API_KEY
 const stockApiUrl = process.env.TWELVEDATA_API_URL
 
-import type { Asset } from '../../../src/components/List'
+import type { Asset } from 'src/components/List'
 
 type PortfolioResponseData = {
   assets: Asset[]
