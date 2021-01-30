@@ -24,7 +24,7 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
   async function trackSymbol() {
     dispatch(addStockSymbol({ symbol, name, quantity }))
     queryClient.invalidateQueries('portfolioPrices')
-    push('/')
+    push('/portfolio')
   }
 
   return (

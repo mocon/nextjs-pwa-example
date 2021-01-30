@@ -24,7 +24,7 @@ export default function NewCryptoSymbolScreen({ reactSelectOptions }) {
   async function trackSymbol() {
     dispatch(addCryptoSymbol({ symbol, name, quantity }))
     queryClient.invalidateQueries('portfolioPrices')
-    push('/')
+    push('/portfolio')
   }
 
   return (

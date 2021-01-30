@@ -14,7 +14,7 @@ export const ClearButton = () => {
     if (window.confirm('Are you sure?')) {
       dispatch(resetAllSymbols())
       queryClient.invalidateQueries('portfolioPrices')
-      push('/')
+      push('/portfolio')
     }
   }
 

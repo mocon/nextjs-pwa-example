@@ -20,7 +20,7 @@ export default function EditSymbolScreen() {
         <title>Edit Holding</title>
       </Head>
       <Header title='Edit Holding'>
-        <Button onClick={() => push('/')}>Back</Button>
+        <Button onClick={() => push('/portfolio')}>Back</Button>
       </Header>
       <Container>
         <Box mt={3}>
