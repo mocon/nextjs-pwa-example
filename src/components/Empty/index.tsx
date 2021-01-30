@@ -4,9 +4,9 @@ export const Empty = ({ emoji = '🏖️', message = 'Nothing to see here' }) =>
   <Box
     display='flex'
     flexDirection='column'
+    flex={1}
     justifyContent='center'
     alignItems='center'
-    p={4}
   >
     <Text fontSize={60} m={0}>
       {emoji}
