@@ -2,21 +2,6 @@ import wretch from 'wretch'
 
 const LOCAL_API = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api`
 
-/*
-  These functions call the local Next.js API, and are passed to:
-
-  - `getServerSideProps` on the server
-  - `react-query` on the client
-
-  Give each query a key using `useQuery`:
-
-  const { data } = useQuery('allCryptoData', fetchAllCryptoData)
-  
-  Later, invalidate it to re-fetch the query:
-
-  queryClient.invalidateQueries('allCryptoData')
-*/
-
 export const fetchAllCryptoData = () =>
   wretch(`${LOCAL_API}/crypto`).get().json()
 
@@ -34,5 +19,22 @@ export const fetchPortfolioPrices = (cryptos, stocks) =>
     .post(JSON.stringify({ cryptos, stocks }))
     .json()
 
+/*
+  sendSms('Hello and welcome from Next PWA app.', '+13104308876')
+*/
 export const sendSms = (message, to) =>
   wretch(`${LOCAL_API}/send-sms`).post(JSON.stringify({ message, to })).json()
+
+/*
+  sendEmail(
+    'myles.oconnor@gmail.com',
+    'myles.oconnor@gmail.com',
+    'Sending with SendGrid is Fun',
+    'and easy to do anywhere, even with Node.js',
+    '<strong>and easy to do anywhere, even with Node.js</strong>',
+  )
+*/
+export const sendEmail = (to, from, subject, text, html) =>
+  wretch(`${LOCAL_API}/send-email`)
+    .post(JSON.stringify({ to, from, subject, text, html }))
+    .json()
