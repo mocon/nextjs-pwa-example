@@ -33,3 +33,6 @@ export const fetchPortfolioPrices = (cryptos, stocks) =>
   wretch(`${LOCAL_API}/portfolio`)
     .post(JSON.stringify({ cryptos, stocks }))
     .json()
+
+export const sendSms = (message, to) =>
+  wretch(`${LOCAL_API}/send-sms`).post(JSON.stringify({ message, to })).json()

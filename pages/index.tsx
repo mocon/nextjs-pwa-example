@@ -13,7 +13,7 @@ import {
   Loading,
   ShareButton,
 } from 'src/components'
-import { fetchPortfolioPrices } from 'src/utils/queries'
+import { fetchPortfolioPrices, sendSms } from 'src/utils/queries'
 
 export default function HomeScreen() {
   const { push } = useRouter()
@@ -22,6 +22,10 @@ export default function HomeScreen() {
   const { data: portfolio, isLoading } = useQuery('portfolioPrices', () =>
     fetchPortfolioPrices(cryptos, stocks),
   )
+
+  const sendText = () => {
+    sendSms('Hello and welcome from Next PWA app.', '+13104308876')
+  }
 
   return (
     <>
@@ -32,6 +36,7 @@ export default function HomeScreen() {
         <Button onClick={() => push('/symbol-type')}>Add</Button>
       </Header>
       <Container>
+        <Button onClick={sendText}>Send Text</Button>
         {isLoading && <Loading />}
         {R.path(['length'], portfolio) > 0 && (
           <>
