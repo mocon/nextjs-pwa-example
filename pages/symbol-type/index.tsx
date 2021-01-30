@@ -12,7 +12,7 @@ export default function SymbolTypeScreen() {
         <title>Symbol Type</title>
       </Head>
       <Header title='Symbol Type'>
-        <Button onClick={() => push('/')}>Back</Button>
+        <Button onClick={() => push('/portfolio')}>Back</Button>
       </Header>
       <Container justifyContent='center' alignItems='center'>
         <Text fontSize={4} mb={4}>

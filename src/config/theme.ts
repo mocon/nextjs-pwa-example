@@ -48,7 +48,7 @@ export const GlobalStyles = createGlobalStyle<any>`
   }
 
   body {
-    line-height: 1;
+    line-height: 1.3;
   }
 
   ol, ul {

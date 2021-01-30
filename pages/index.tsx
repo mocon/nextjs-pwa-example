@@ -1,49 +1,66 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
-import * as R from 'ramda'
-import {
-  Button,
-  ClearButton,
-  Container,
-  Empty,
-  Header,
-  List,
-  Loading,
-  ShareButton,
-} from 'src/components'
-import { fetchPortfolioPrices } from 'src/utils/queries'
+import { useState, useEffect } from 'react'
+import { Magic } from 'magic-sdk'
+import { Box, Text } from 'component-library-tsdx-example'
+import { Button, Container, Header, Input } from 'src/components'
 
-export default function HomeScreen() {
+export default function NewStockSymbolScreen() {
   const { push } = useRouter()
-  const cryptos = useSelector((state) => state.symbols.cryptos)
-  const stocks = useSelector((state) => state.symbols.stocks)
-  const { data: portfolio, isLoading } = useQuery('portfolioPrices', () =>
-    fetchPortfolioPrices(cryptos, stocks),
-  )
+  const [email, setEmail] = useState('')
+  const [magic, setMagic] = useState(null)
+
+  useEffect(() => {
+    !magic &&
+      setMagic(new Magic(process.env.NEXT_PUBLIC_MAGICLINK_PUBLISHABLE_KEY))
+    magic?.preload()
+  }, [magic])
+
+  async function handleLoginWithEmail(email) {
+    try {
+      let didToken = await magic.auth.loginWithMagicLink({
+        email,
+      })
+      await authenticateWithServer(didToken)
+    } catch (error) {
+      // handle error
+    }
+  }
+
+  async function authenticateWithServer(didToken) {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + didToken,
+      },
+    })
+    res.status === 200 && push('/portfolio')
+  }
 
   return (
     <>
       <Head>
-        <title>Portfolio</title>
+        <title>Log In</title>
       </Head>
-      <Header title='Portfolio'>
-        <Button onClick={() => push('/symbol-type')}>Add</Button>
+      <Header title='Log In'>
+        {/* <Button onClick={() => push('/')}>Back</Button> */}
       </Header>
-      <Container>
-        {isLoading && <Loading />}
-        {R.path(['length'], portfolio) > 0 && (
-          <>
-            {/* @ts-ignore */}
-            <List portfolio={portfolio} />
-            <ClearButton />
-          </>
-        )}
-        {R.path(['length'], portfolio) === 0 && (
-          <Empty message='Portfolio is empty' />
-        )}
-        <ShareButton />
+      <Container justifyContent='center' alignItems='center'>
+        <Box my={3}>
+          <Text fontSize={4} textAlign='center' mb={4}>
+            Enter your email to receive a magic link to log in. We do not
+            collect or share any user data.
+          </Text>
+          <Box display='flex'>
+            <Input
+              type='email'
+              placeholder='user@email.com'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Box>
+        </Box>
+        <Button onClick={() => handleLoginWithEmail(email)}>Send Link</Button>
       </Container>
     </>
   )

@@ -33,7 +33,7 @@ export default function NewStockSymbolScreen({ reactSelectOptions }) {
         <title>Add Stock</title>
       </Head>
       <Header title='Add Stock'>
-        <Button onClick={() => push('/')}>Back</Button>
+        <Button onClick={() => push('/portfolio')}>Back</Button>
       </Header>
       <Container>
         <Box my={3}>

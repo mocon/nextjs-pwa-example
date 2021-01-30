@@ -33,7 +33,7 @@ export default function NewCryptoSymbolScreen({ reactSelectOptions }) {
         <title>Add Crypto</title>
       </Head>
       <Header title='Add Crypto'>
-        <Button onClick={() => push('/')}>Back</Button>
+        <Button onClick={() => push('/portfolio')}>Back</Button>
       </Header>
       <Container>
         <Box my={3}>
